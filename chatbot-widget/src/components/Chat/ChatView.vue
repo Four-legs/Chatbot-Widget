@@ -26,7 +26,7 @@ const topWidth = computed(() => {
 })
 
 const getViewHeight = async () => {
-  const mainElement = document.querySelector('#main')
+  const mainElement = document.querySelector('#widget-modal')
   if (mainElement) {
     viewHeight.value = (mainElement as HTMLElement).offsetHeight
   }

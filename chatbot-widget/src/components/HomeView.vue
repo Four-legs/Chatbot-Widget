@@ -18,10 +18,13 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <!--
   <v-progress-circular v-if="store.storeStatus !== 'idle'" indeterminate />
-  -->
+  <!--
   <v-container class="position-relative">
     <ChatView :active-chatroom="activeChatroom" />
+  </v-container>
+  -->
+  <v-container id="widget-modal" v-else class="position-relative w-50 h-50">
+    <WidgetModal class="w-full h-full" style="z-index: 100;" :active-chatroom="activeChatroom" :is-open="true" />
   </v-container>
 </template>

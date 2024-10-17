@@ -24,7 +24,9 @@ declare module 'vue' {
     OpenChatButton: typeof import('./components/OpenChatButton.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    Widget: typeof import('./components/Widget.vue')['default']
+    Widget: typeof import('./components/Widget/Widget.vue')['default']
+    WidgetButton: typeof import('./components/Widget/WidgetButton.vue')['default']
+    WidgetModal: typeof import('./components/Widget/WidgetModal.vue')['default']
     WidgetView: typeof import('./components/WidgetView.vue')['default']
   }
 }
