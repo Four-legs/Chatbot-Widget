@@ -1,34 +1,38 @@
 <script setup lang="ts">
-import { IMessage } from '@/types'
-import ChatBottom from './Chat/ChatBottom/ChatBottom.vue'
-import ChatMiddle from './Chat/ChatMiddle/ChatMiddle.vue'
+import { IChatroom, IMessage } from '@/types'
+import ChatView from './Chat/ChatView.vue'
+import ChatTestService from './Chat/ChatService/ChatTestService'
+import useChatStore from '@/stores/ChatStore'
 
-const testMessages: IMessage[] = []
+const store = useChatStore()
+const activeChatroom: Ref<IChatroom> = ref(store.ChatroomTemplate)
+
+const mainRef: Ref<HTMLElement | null> = ref(null)
+const topRef: Ref<HTMLElement | null> = ref(null)
+const bottomRef: Ref<HTMLElement | null> = ref(null)
+
+const mainHeight: Ref<number> = ref(0)
+const topHeight: Ref<number> = ref(0)
+const middleHeight: Ref<number> = ref(0)
+const bottomHeight: Ref<number> = ref(0)
+
+let isMount = false
 
 onBeforeMount(() => {
-  const tempMsg: IMessage = {
-    message_id: 1,
-    content: 'Test Message',
-    created_at: 'now',
-    state: 'sent',
-    role: 'human',
-  }
-  testMessages.push(tempMsg)
-  const tempReplyMsg: IMessage = {
-    message_id: 2,
-    content: 'Test Reply Message',
-    created_at: 'now',
-    state: 'sent',
-    role: 'ai',
-  }
-  testMessages.push(tempReplyMsg)
+  store.storeStatus = 'loading'
+  const tempRoom: IChatroom = ChatTestService.getChatRoomInfo(1)
+  store.ChatroomCache.push(tempRoom)
+  store.setActiveChatroom(1)
+  store.storeStatus = 'idle'
 })
 
 </script>
 
 <template>
-  <v-container id="main-content" class="h-full">
-    <ChatMiddle :chatroom-id="1" :messages="testMessages" />
-    <ChatBottom />
+  <!--
+  <v-progress-circular v-if="store.storeStatus !== 'idle'" indeterminate />
+  -->
+  <v-container class="position-relative">
+    <ChatView :active-chatroom="activeChatroom" />
   </v-container>
 </template>

@@ -1,10 +1,8 @@
 <template>
   <v-app>
-    <v-main>
+    <v-main class="h-full">
       <router-view />
     </v-main>
-
-    <AppFooter />
   </v-app>
 </template>
 

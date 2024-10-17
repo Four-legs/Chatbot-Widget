@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type Ref, ref } from 'vue'
+import ChatTestService from '../ChatService/ChatTestService'
 
 const inputValue: Ref<string> = ref('')
 const props = defineProps<{
@@ -7,30 +8,33 @@ const props = defineProps<{
   type?: string;
 }>()
 
-const emit = defineEmits(['inputValueUpdate'])
-
 const handleInput = () => {
-  emit('inputValueUpdate', inputValue.value)
+  ChatTestService.sendMessage(inputValue.value)
+  inputValue.value = ''
 }
 
 </script>
 
 <template>
-  <v-container class="w-100">
-    <v-row align="center" justify="space-between">
-      <v-icon icon="mdi-comment" />
-      <v-text-field :id="props.id"
-                    v-model="inputValue"
-                    class="pl-4"
-                    clearable
-                    hide-details
-                    label="message"
-                    placeholder="Write your message here"
-                    rounded="pill"
-                    variant="outlined"
-                    @keydown.enter="handleInput"
-      />
-      <v-btn class="ma-2" icon="mdi-send" @click="handleInput" />
+  <v-container class="w-full d-flex" color="white">
+    <v-row align="center">
+      <v-col>
+        <v-text-field :id="props.id"
+                      v-model="inputValue"
+                      class="pl-4"
+                      clearable
+                      hide-details
+                      label="message"
+                      placeholder="Write your message here"
+                      prepend-icon="mdi-comment"
+                      rounded="pill"
+                      variant="outlined"
+                      @keydown.enter="handleInput"
+        />
+      </v-col>
+      <v-col cols="1">
+        <v-btn class="ma-2" icon="mdi-send" @click="handleInput" />
+      </v-col>
     </v-row>
   </v-container>
 </template>

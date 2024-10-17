@@ -1,17 +1,26 @@
 <script setup lang="ts">
-import { IMessage } from '@/types'
-import Message from '@/components/Message/Message.vue'
+import { IChatroom, IMessage } from '@/types'
+import HumanMessage from '@/components/Message/HumanMessage.vue'
+import AiMessage from '@/components/Message/AiMessage.vue'
+import useChatStore from '@/stores/ChatStore'
 
+const store = useChatStore()
 const props = defineProps < {
   chatroomId: number;
-  messages?: IMessage[];
 }>()
+
+const activeChatroom: Ref<IChatroom> = ref(store.findChatroomById(props.chatroomId))
 
 </script>
 <template>
-  <v-container id="messages-container">
-    <v-row class="d-flex" v-for="message in props.messages" :key="message.message_id" justify-end>
-      <Message :message="message" />
+  <v-container class="border-thin rounded overflow-y-auto">
+    <v-row v-for="message in activeChatroom.messages" :key="message.message_id">
+      <v-col cols="12" v-if="message.role === 'human'">
+        <HumanMessage :message="message" />
+      </v-col>
+      <v-col cols="12" v-else-if="message.role === 'ai'">
+        <AiMessage :message="message" />
+      </v-col>
     </v-row>
   </v-container>
 </template>
