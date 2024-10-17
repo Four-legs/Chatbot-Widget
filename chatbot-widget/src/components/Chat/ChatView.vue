@@ -58,7 +58,11 @@ onBeforeUnmount(() => {
 
 <template>
   <v-container id="chat-view" class="position-relative d-flex flex-column ma-0 pa-0 h-full">
-    <ChatTop id="chat-top" :chat-room-id="1" class="position-fixed top-0" :style="{'max-width': topWidth}"/>
+    <ChatTop id="chat-top"
+             :chat-room-id="1"
+             class="position-fixed top-0"
+             :style="{'max-width': topWidth}"
+    />
     <ChatMiddle id="chat-middle" :chatroom-id="1" :style="{ 'margin-top': middleMargin, 'min-height': middleHeight, 'max-height': middleHeight}" />
     <ChatBottom id="chat-bottom" class="position-fixed bottom-0" />
   </v-container>

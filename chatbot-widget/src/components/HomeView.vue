@@ -1,22 +1,11 @@
 <script setup lang="ts">
-import { IChatroom, IMessage } from '@/types'
+import { IChatroom } from '@/types'
 import ChatView from './Chat/ChatView.vue'
 import ChatTestService from './Chat/ChatService/ChatTestService'
 import useChatStore from '@/stores/ChatStore'
 
 const store = useChatStore()
 const activeChatroom: Ref<IChatroom> = ref(store.ChatroomTemplate)
-
-const mainRef: Ref<HTMLElement | null> = ref(null)
-const topRef: Ref<HTMLElement | null> = ref(null)
-const bottomRef: Ref<HTMLElement | null> = ref(null)
-
-const mainHeight: Ref<number> = ref(0)
-const topHeight: Ref<number> = ref(0)
-const middleHeight: Ref<number> = ref(0)
-const bottomHeight: Ref<number> = ref(0)
-
-let isMount = false
 
 onBeforeMount(() => {
   store.storeStatus = 'loading'
