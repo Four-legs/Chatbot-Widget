@@ -13,7 +13,7 @@ const activeChatroom: Ref<IChatroom> = ref(store.findChatroomById(props.chatroom
 
 </script>
 <template>
-  <v-container class="border-thin rounded overflow-y-auto">
+  <v-container class="border-thin rounded">
     <v-row v-for="message in activeChatroom.messages" :key="message.message_id">
       <v-col v-if="message.role === 'human'" cols="12">
         <HumanMessage :message="message" />

@@ -16,11 +16,12 @@ const handleInput = () => {
 </script>
 
 <template>
-  <v-container class="w-full d-flex" color="white">
-    <v-row align="center">
+  <v-container class="pt-2 w-full d-flex align-center" color="white">
+    <v-row class="">
       <v-col>
         <v-text-field :id="props.id"
                       v-model="inputValue"
+                      append-inner-icon="mdi-send"
                       class="pl-4"
                       clearable
                       hide-details
@@ -31,9 +32,6 @@ const handleInput = () => {
                       variant="outlined"
                       @keydown.enter="handleInput"
         />
-      </v-col>
-      <v-col cols="1">
-        <v-btn class="ma-2" icon="mdi-send" @click="handleInput" />
       </v-col>
     </v-row>
   </v-container>

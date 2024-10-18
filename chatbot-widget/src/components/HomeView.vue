@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { IChatroom } from '@/types'
-import ChatView from './Chat/ChatView.vue'
 import ChatTestService from './Chat/ChatService/ChatTestService'
 import useChatStore from '@/stores/ChatStore'
+import WidgetModal from './Widget/WidgetModal.vue'
 
 const store = useChatStore()
 const activeChatroom: Ref<IChatroom> = ref(store.ChatroomTemplate)
@@ -24,7 +24,16 @@ onBeforeMount(() => {
     <ChatView :active-chatroom="activeChatroom" />
   </v-container>
   -->
-  <v-container id="widget-modal" v-else class="position-relative w-50 h-50">
-    <WidgetModal class="w-full h-full" style="z-index: 100;" :active-chatroom="activeChatroom" :is-open="true" />
+  <v-container v-else
+               id="widget-modal"
+               class="position-relative"
+               style="width:600px; height:600px;"
+  >
+    <WidgetModal :active-chatroom="activeChatroom"
+                 :height="600"
+                 :is-open="true"
+                 style="z-index: 100;"
+                 :width="600"
+    />
   </v-container>
 </template>
